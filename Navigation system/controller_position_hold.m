@@ -1,4 +1,4 @@
-function theta_wb_c = position_hold_controller(X, psi_c, position_c)
+function theta_wb_c = controller_position_hold(X, psi_c, position_c)
 
 K_p_pos = evalin('base', 'K_p_pos');
 K_d_pos = evalin('base', 'K_d_pos');

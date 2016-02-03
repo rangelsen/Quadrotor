@@ -20,7 +20,7 @@ psi = X(9);
 theta_wb = X(7:9);
 omega_wb = X(10:12);
 
-d_theta_wb = transformation(theta_wb)*omega_wb;
+d_theta_wb = angular_momentum_transformation(theta_wb)*omega_wb;
 
 T = -K_p*(theta_wb - theta_wb_c) - K_d*d_theta_wb;
 

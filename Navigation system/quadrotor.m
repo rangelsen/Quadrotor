@@ -10,7 +10,7 @@ tau = generate_forces_moments(u);
 T_motor = tau(1:3);                                                         % Generate moment vector about quad's center mass
 F_motor = tau(4:6);
 
-d_theta_wb = transformation(theta_wb)*omega_wb;
+d_theta_wb = angular_momentum_transformation(theta_wb)*omega_wb;
 
 d_omega_wb = process_rotation(omega_wb, T_motor);                           % Compute rotational process
 

@@ -1,4 +1,4 @@
-function T_theta = thransformation(theta_wb)
+function T_theta = angular_momentum_thransformation(theta_wb)
 
 phi = theta_wb(1);
 theta = theta_wb(2);
