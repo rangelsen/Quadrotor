@@ -1,3 +1,8 @@
+%{
+Developing a relationship between the torques
+and the respective motors
+%}
+
 syms m_F m_T T_1 T_2 T_3 T_4
 
 A1 = [-m_F -m_F m_F m_F];
