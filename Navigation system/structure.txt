@@ -1,0 +1,24 @@
+- extract states
+- update waypoints
+- compute inputs
+- solve EOM
+
+update waypoints = compute inputs 	?
+
+
+
+__________________________________________
+* extract states *
+	'state name' = X(":");
+
+* update waypoints *
+	'constant'
+
+* compute inputs *
+	theta_wb_c = controller_position();
+	u(i) = controller_attitude();
+
+* Solve EoM *	
+	dX = quadrotor();
+	X(i + 1) = X(i) + h*dX;
+__________________________________________
