@@ -1,6 +1,8 @@
 %{
-Developing a relationship between the torques
-and the respective motors
+Developing a relationship between the torques/forces
+and the respective motors. This is done by solving
+a set of linear equations T = r x F and 
+F = sum(k_F*omega_motor_i^2), i = {1, 2, 3, 4}
 %}
 
 syms m_F m_T T_1 T_2 T_3 T_4
