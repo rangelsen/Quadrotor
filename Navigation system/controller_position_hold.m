@@ -31,8 +31,8 @@ if (abs(psi - psi_c) < psi_c_tolerance)
 	theta_c =   K_p_pos * delta_position_rotated(1) + K_d_pos * d_delta_position_rotated(1);
 end
 
-phi_c   = saturate(phi_c,   deg2rad(70));
-theta_c = saturate(theta_c, deg2rad(70));
+phi_c   = saturate(phi_c,   -deg2rad(70), deg2rad(70));
+theta_c = saturate(theta_c, -deg2rad(70), deg2rad(70));
 
 delta_position_rotated_last = delta_position_rotated;
 

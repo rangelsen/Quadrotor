@@ -45,6 +45,7 @@ for i = 1:N-1
     cross_track_error(:, i) = output_guidance_system(4);
 
     u(:, i)                 = controller_attitude_nonlinear(X(:, i), theta_wb_c(:, i));
+    u(:, i)                 = u(:, i) + controller_altitude(X(:, i), 2, u(:, i));
     
     d_X(:, i) = quadrotor(X(:, i), u(:, i));
     X(:, i+1) = X(:, i) + dt*d_X(:, i);
@@ -59,25 +60,25 @@ d_r = X(4:6, :);
 %% Plot - Orientation
 plotter = data_plotter();
 
-plotter.figure_nr = 1;
-plotter.plot_orientation(T, theta_wb_out, theta_wb_c);
+% plotter.figure_nr = 1;
+% plotter.plot_orientation(T, theta_wb_out, theta_wb_c);
 
 %% Plot - Position
 plotter.figure_nr = plotter.figure_nr + 1;
 plotter.plot_position(T, r);
 
 %% Plot - Motors
-% plotter.figure_nr = plotter.figure_nr + 1;
-% plotter.plot_motors(T, u);
+plotter.figure_nr = plotter.figure_nr + 1;
+plotter.plot_motors(T, u);
 
 %% Plot - XY
-plotter.figure_nr = plotter.figure_nr + 1;
-plotter.plot_XY(r, waypoints, approach_distance);
+% plotter.figure_nr = plotter.figure_nr + 1;
+% plotter.plot_XY(r, waypoints, approach_distance);
 
 %% Plot - Translational speed
-plotter.figure_nr = plotter.figure_nr + 1;
-plotter.plot_speed(T, d_r);
+% plotter.figure_nr = plotter.figure_nr + 1;
+% plotter.plot_speed(T, d_r);
 
 %% Plot - Cross_track_error
-plotter.figure_nr = plotter.figure_nr + 1;
-plotter.plot_cross_track_error(T, cross_track_error);
+% plotter.figure_nr = plotter.figure_nr + 1;
+% plotter.plot_cross_track_error(T, cross_track_error);

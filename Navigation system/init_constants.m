@@ -1,3 +1,5 @@
+n_motors = 4;
+
 %% generate_moment
 l = .15;
 k_F = .04;
@@ -9,7 +11,7 @@ I = 4*eye(3);
 m = 2;
 g = 9.81;
 
-%% controller_attitude
+%% Controller attitude
 K_p = 300;
 K_d = 120;
 K_p_yaw = K_p;
@@ -17,6 +19,11 @@ K_d_yaw = K_d;
 thr_base = 2*9.81/(4*k_F) + 100;
 gamma_max = 5000;
 gamma_min = 0;
+
+%% Controller altitude
+
+K_p_z = 80;
+K_d_z = 200;
 
 %% Controller position
 

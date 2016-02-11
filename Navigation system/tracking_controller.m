@@ -34,8 +34,8 @@ if (abs(psi - psi_c) < psi_c_tolerance)
     end
 end
 
-phi_c   = saturate(phi_c,   phi_c_max);
-theta_c = saturate(theta_c, theta_c_max);
+phi_c   = saturate(phi_c, -phi_c_max, phi_c_max);
+theta_c = saturate(theta_c, -theta_c_max, theta_c_max);
 
 alpha_last = alpha;
 
