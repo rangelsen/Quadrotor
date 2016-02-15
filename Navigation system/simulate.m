@@ -2,7 +2,7 @@ clear all; clc;
 %% Options
 
 %% Initialize system constants
-run('init_constants.m');
+constants = Constants();
 
 %% Initial Conditions
 r_0     = [10 0 0]';
@@ -18,7 +18,7 @@ x_0 = [    r_0;
 [mx0, nx0] = size(x_0);  
 [mt0, nt0] = size(theta_0);
 
-%% Simulation
+%% Simulation parameters
 
 sim_time = 125;
 dt = .005;
@@ -26,10 +26,10 @@ T  = 0:dt:sim_time;
 N  = length(T);
 
 % Allocations
-X          = NaN(mx0, N);
-u          = NaN(4, N - 1);
-theta_wb_c = NaN(mt0, N - 1);
-cross_track_error   = NaN(1, N );
+X                 = NaN(mx0, N);
+u                 = NaN(4, N - 1);
+theta_wb_c        = NaN(mt0, N - 1);
+cross_track_error = NaN(1, N );
 
 
 % Initial conditions
@@ -37,17 +37,17 @@ X(:, 1) = x_0;
 
 for i = 1:N-1
 
-    waypoints  = update_waypoints(X(:, i));
+    waypoints  = update_waypoints(X(:, i), constants);
 
-    output_guidance_system  = guidance_system(X(:, i), waypoints.previous_waypoint, waypoints.next_waypoint);
+    output_guidance_system  = guidance_system(X(:, i), waypoints.previous_waypoint, waypoints.next_waypoint, constants);
 
     theta_wb_c(:, i)        = output_guidance_system(1:3);
     cross_track_error(:, i) = output_guidance_system(4);
 
-    u(:, i)                 = controller_attitude_nonlinear(X(:, i), theta_wb_c(:, i));
-    u(:, i)                 = u(:, i) + controller_altitude(X(:, i), 2, u(:, i));
+    u(:, i)                 = controller_attitude_nonlinear(X(:, i), theta_wb_c(:, i), constants);
+    u(:, i)                 = u(:, i) + controller_altitude(X(:, i), 2, u(:, i), constants);
     
-    d_X(:, i) = quadrotor(X(:, i), u(:, i));
+    d_X(:, i) = quadrotor(X(:, i), u(:, i), constants);
     X(:, i+1) = X(:, i) + dt*d_X(:, i);
 
 end

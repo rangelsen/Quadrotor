@@ -1,8 +1,6 @@
-function output_guidance_system = guidance_system(X, previous_waypoint, next_waypoint)
+function output_guidance_system = guidance_system(X, previous_waypoint, next_waypoint, constants)
 
 persistent cross_track_error_last waypoint_index waypoint_collection
-
-approach_distance = evalin('base', 'approach_distance');
 
 x     = X(1);
 y     = X(2);
@@ -36,10 +34,10 @@ d_cross_track_error    = cross_track_error - cross_track_error_last;
 
 %% Select suitable controller
 
-if (norm(next_waypoint - position) < approach_distance)
+if (norm(next_waypoint - position) < constants.approach_distance)
 	theta_wb_c = controller_position_hold(X, alpha, next_waypoint);
 else
-	theta_wb_c = tracking_controller(X, alpha, cross_track_error, d_cross_track_error);
+	theta_wb_c = tracking_controller(X, alpha, cross_track_error, d_cross_track_error, constants);
 end
 
 cross_track_error_last = cross_track_error;

@@ -1,7 +1,4 @@
-function dd_r = process_position(theta_wb, F_motors)
-
-m = evalin('base', 'm');
-g = evalin('base', 'g');
+function dd_r = process_position(theta_wb, F_motors, constants)
 
 F_sum = [           0;
                     0;
@@ -9,6 +6,6 @@ F_sum = [           0;
      
 R_wb = rotation(theta_wb);     
 
-dd_r = 1/m*([0 0 -m*g]' + R_wb*F_sum);
+dd_r = 1/constants.m*([0 0 -constants.m*constants.g]' + R_wb*F_sum);
 
 end

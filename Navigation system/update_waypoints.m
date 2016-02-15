@@ -1,8 +1,6 @@
-function waypoints = update_waypoints(X)
+function waypoints = update_waypoints(X, constants)
 
 persistent collection waypoint_index
-
-approach_distance = evalin('base', 'approach_distance');
 
 x = X(1);
 y = X(2);
@@ -29,7 +27,7 @@ waypoints.collection        = collection;
 waypoints.previous_waypoint = collection(:, waypoint_index);
 waypoints.next_waypoint     = collection(:, waypoint_index + 1);
 
-if(norm(waypoints.next_waypoint - position) < approach_distance && waypoint_index < waypoints.n_waypoints - 1)
+if(norm(waypoints.next_waypoint - position) < constants.approach_distance && waypoint_index < waypoints.n_waypoints - 1)
 	waypoint_index              = waypoint_index + 1;
 	waypoints.previous_waypoint = collection(:, waypoint_index);
 	waypoints.next_waypoint     = collection(:, waypoint_index + 1);	
