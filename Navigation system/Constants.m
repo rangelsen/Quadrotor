@@ -30,8 +30,8 @@ classdef Constants
 			%% Physical
 
 			obj.l = .15;		% Length of arm in x-configuration
-			obj.k_F = .04; 		% Motor force constant F = k_F*w^2
-			obj.k_T = .05;		% Motor torque constant T = k_T*w^2
+			obj.k_F = .04; 		% Motor force constant F = k_F*w^2 = k_F*gamma
+			obj.k_T = .05;		% Motor torque constant T = k_T*w^2 = k_T*gamma
 
 			obj.I = 4*eye(3);	% Inertia matrix
 
@@ -45,7 +45,7 @@ classdef Constants
 			obj.K_p_yaw = obj.K_p;						% Porportional gain in yaw
 			obj.K_d_yaw = obj.K_d;						% Derivative gain in yaw
 			obj.thr_base = 2*9.81/(4*obj.k_F) + 100;	% Base throttle for approximate altitude hold
-			obj.gamma_max = 5000;						% Maximum motor rad/s
+			obj.gamma_max = 1000;						% Maximum motor rad/s
 			obj.gamma_min = 0;							% Minimum motor rad/s
 
 			%% Altitude controller

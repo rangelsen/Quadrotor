@@ -35,7 +35,7 @@ d_cross_track_error    = cross_track_error - cross_track_error_last;
 %% Select suitable controller
 
 if (norm(next_waypoint - position) < constants.approach_distance)
-	theta_wb_c = controller_position_hold(X, alpha, next_waypoint);
+	theta_wb_c = controller_position_hold(X, alpha, next_waypoint, constants);
 else
 	theta_wb_c = tracking_controller(X, alpha, cross_track_error, d_cross_track_error, constants);
 end

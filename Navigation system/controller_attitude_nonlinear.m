@@ -25,19 +25,6 @@ gamma_SE = 1/(4*k_F*k_T)*(-T(3)*k_F - T(1)*k_T + T(2)*k_T + T(4)*k_T);
 gamma_SW = 1/(4*k_F*k_T)*(T(3)*k_F + T(1)*k_T + T(2)*k_T + T(4)*k_T);
 gamma_NW = 1/(4*k_F*k_T)*(-T(3)*k_F + T(1)*k_T - T(2)*k_T + T(4)*k_T);
 
-if (gamma_NE > constants.gamma_max) , gamma_NE = constants.gamma_max; end
-if (gamma_NE < constants.gamma_min) , gamma_NE = constants.gamma_min; end
-
-if (gamma_SE > constants.gamma_max) , gamma_SE = constants.gamma_max; end
-if (gamma_SE < constants.gamma_min) , gamma_SE = constants.gamma_min; end
-
-if (gamma_SW > constants.gamma_max) , gamma_SW = constants.gamma_max; end
-if (gamma_SW < constants.gamma_min) , gamma_SW = constants.gamma_min; end
-
-if (gamma_NW > constants.gamma_max) , gamma_NW = constants.gamma_max; end
-if (gamma_NW < constants.gamma_min) , gamma_NW = constants.gamma_min; end
-
-
 gamma_motors = [ gamma_NE;
                  gamma_SE;
                  gamma_SW;
