@@ -11,7 +11,7 @@ classdef Constants
 		K_p; K_d; K_p_yaw; K_d_yaw; thr_base; gamma_max; gamma_min;
 
 		%% Altitude controller
-		K_p_z; K_d_z;
+		K_p_z; K_d_z; K_i_z;
 
 		%% Position controller
 		K_p_phi; K_d_phi; K_p_theta; phi_c_max; theta_c_max; psi_c_tolerance;
@@ -26,6 +26,8 @@ classdef Constants
 		function obj = Constants() 
 
 			obj.n_motors = 4;
+			obj.gamma_max = 5000;	% Maximum motor rad/s
+			obj.gamma_min = 0;		% Minimum motor rad/s
 		
 			%% Physical
 
@@ -45,13 +47,12 @@ classdef Constants
 			obj.K_p_yaw = obj.K_p;						% Porportional gain in yaw
 			obj.K_d_yaw = obj.K_d;						% Derivative gain in yaw
 			obj.thr_base = 2*9.81/(4*obj.k_F) + 100;	% Base throttle for approximate altitude hold
-			obj.gamma_max = 1000;						% Maximum motor rad/s
-			obj.gamma_min = 0;							% Minimum motor rad/s
 
 			%% Altitude controller
 
-			obj.K_p_z = 80;		% Proportional gain in z-direction
-			obj.K_d_z = 200;	% Derivative gain in z-direction
+			obj.K_p_z = 1;		% Gains for the altitude PID
+			obj.K_d_z = 1;
+			obj.K_i_z = .01;
 
 			%% Position controller
 

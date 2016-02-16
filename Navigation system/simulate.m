@@ -20,7 +20,7 @@ x_0 = [    r_0;
 
 %% Simulation parameters
 
-sim_time = 125;
+sim_time = 50;
 %-----------------%
 
 dt = .005;
@@ -46,7 +46,7 @@ for i = 1:N-1
     theta_wb_c(:, i)        = output_guidance_system(1:3);
     cross_track_error(:, i) = output_guidance_system(4);
 
-    u(:, i) = controller_attitude_nonlinear(X(:, i), theta_wb_c(:, i), constants); % + controller_altitude(X(:, i), 2, constants);
+    u(:, i) = controller_altitude(X(:, i), 0, constants);
     u(:, i) = saturate(u(:, i), constants.gamma_min, constants.gamma_max);
     
     d_X(:, i) = quadrotor(X(:, i), u(:, i), constants);
@@ -74,12 +74,12 @@ plotter.figure_nr = plotter.figure_nr + 1;
 plotter.plot_motors(T, u);
 
 %% Plot - XY
-plotter.figure_nr = plotter.figure_nr + 1;
-plotter.plot_XY(r, waypoints, constants.approach_distance);
+% plotter.figure_nr = plotter.figure_nr + 1;
+% plotter.plot_XY(r, waypoints, constants.approach_distance);
 
 %% Plot - Translational speed
-% plotter.figure_nr = plotter.figure_nr + 1;
-% plotter.plot_speed(T, d_r);
+plotter.figure_nr = plotter.figure_nr + 1;
+plotter.plot_speed(T, d_r);
 
 %% Plot - Cross_track_error
 % plotter.figure_nr = plotter.figure_nr + 1;
