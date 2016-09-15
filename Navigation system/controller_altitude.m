@@ -13,7 +13,7 @@ d_z = X(6);
 
 error_z   = z_c - z;
 
-gamma_motors_altitude = (constants.K_p_z*error_z + constants.K_d_z*d_z + constants.K_i_z * error_accumulated) * ones(constants.n_motors, 1);
+gamma_motors_altitude = constants.K_p_z * error_z; % + constants.K_d_z*d_z + constants.K_i_z * error_accumulated) * ones(constants.n_motors, 1);
 
 error_accumulated = error_accumulated + error_z;
 
