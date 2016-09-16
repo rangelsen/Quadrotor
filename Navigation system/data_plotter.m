@@ -86,7 +86,7 @@ classdef data_plotter
         
         % MOTORS
         
-        function plot_motors(obj, t, u)
+        function plot_motors(obj, t, u, constants)
             
             gamma_NE = u(1, :);
             gamma_SE = u(2, :);
@@ -97,22 +97,30 @@ classdef data_plotter
             set(gcf, 'Name', 'Quadrotor motors');
             
             subplot(2, 2, 1);
+            hold on;
             stairs(t(1:end-1), gamma_NW, 'b');
+            plot([t(1) t(end)], constants.gamma_max*ones(1, 2), 'r');
             title('\gamma_{NW}');
             hold off;
             
             subplot(2, 2, 2);
+            hold on;
             stairs(t(1:end-1), gamma_NE, 'b');
-            title('\gamma_{NW}');
+            plot([t(1) t(end)], constants.gamma_max*ones(1, 2), 'r');
+            title('\gamma_{NE}');
             hold off;
             
             subplot(2, 2, 3);
+            hold on;
             stairs(t(1:end-1), gamma_SW, 'b');
+            plot([t(1) t(end)], constants.gamma_max*ones(1, 2), 'r');
             title('\gamma_{SW}');
             hold off;
             
             subplot(2, 2, 4);
+            hold on;
             stairs(t(1:end-1), gamma_SE, 'b');
+            plot([t(1) t(end)], constants.gamma_max*ones(1, 2), 'r');
             title('\gamma_{SE}');
             hold off;
         end

@@ -10,6 +10,8 @@ d_r_0   = [ 0 0 0]';
 theta_0 = [ 0 0 0]';
 omega_0 = [ 0 0 0]';
 
+r_z_c = 15;
+
 x_0 = [    r_0;
          d_r_0;
        theta_0;
@@ -20,7 +22,7 @@ x_0 = [    r_0;
 
 %% Simulation parameters
 
-sim_time = 20;
+sim_time = 200;
 
 dt = .005;
 T  = 0:dt:sim_time;
@@ -37,7 +39,7 @@ cross_track_error = NaN(1, N );
 X(:, 1) = x_0;
 
 for i = 1:N-1
-
+    
     waypoints  = update_waypoints(X(:, i), constants);
 
     output_guidance_system  = guidance_system(X(:, i), waypoints.previous_waypoint, waypoints.next_waypoint, constants);
@@ -45,7 +47,7 @@ for i = 1:N-1
     theta_wb_c(:, i)        = output_guidance_system(1:3);
     cross_track_error(:, i) = output_guidance_system(4);
     
-    u(:, i) = controller_altitude_feedback_linearizing(X(:, i), 0, constants);
+    u(:, i) = controller_attitude_nonlinear(X(:, i), theta_wb_c(:, i), constants) + controller_altitude_feedback_linearizing(X(:, i), r_z_c, constants);
     u(:, i) = saturate(u(:, i), constants.gamma_min, constants.gamma_max);
     
     d_X(:, i) = quadrotor(X(:, i), u(:, i), constants);
@@ -58,10 +60,12 @@ theta_wb_out = X(7:9, :);
 r = X(1:3, :);
 d_r = X(4:6, :);
 
-%% Plot - Orientation
+%% Plot
 plotter = data_plotter();
+plotter.figure_nr = 0;
 
-% plotter.figure_nr = 1;
+%% Plot - Orientation
+% plotter.figure_nr = plotter.figure_nr + 1;
 % plotter.plot_orientation(T, theta_wb_out, theta_wb_c);
 
 %% Plot - Position
@@ -70,11 +74,11 @@ plotter.plot_position(T, r);
 
 %% Plot - Motors
 plotter.figure_nr = plotter.figure_nr + 1;
-plotter.plot_motors(T, u);
+plotter.plot_motors(T, u, constants);
 
 %% Plot - XY
-% plotter.figure_nr = plotter.figure_nr + 1;
-% plotter.plot_XY(r, waypoints, constants.approach_distance);
+plotter.figure_nr = plotter.figure_nr + 1;
+plotter.plot_XY(r, waypoints, constants.approach_distance);
 
 %% Plot - Translational speed
 plotter.figure_nr = plotter.figure_nr + 1;

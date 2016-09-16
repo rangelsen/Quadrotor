@@ -14,7 +14,7 @@ theta = X(8);
 
 error_z = z_c - z;
 
-desired_accel_z = constants.K_p_z * error_z + constants.K_d_z * d_z + constants.K_i_z * error_accumulated;
+desired_accel_z = constants.K_p_z * error_z - constants.K_d_z * d_z + constants.K_i_z * error_accumulated;
 
 % f_z = compute_vertical_air_resistance(X);
 

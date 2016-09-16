@@ -26,14 +26,14 @@ classdef Constants
 		function obj = Constants() 
 
 			obj.n_motors = 4;
-			obj.gamma_max = 11000;	% Maximum motor rad/s
-			obj.gamma_min = 0;		% Minimum motor rad/s
+			obj.gamma_max = 11000^2; % Maximum motor rad/s
+			obj.gamma_min = 0;		 % Minimum motor rad/s
 		
 			%% Physical
 
 			obj.l = .15;		% Length of arm in x-configuration
-			obj.k_F = 1e-2;		% Motor force constant F = k_F*w^2 = k_F*gamma
-			obj.k_T = 1e-2;		% Motor torque constant T = k_T*w^2 = k_T*gamma
+			obj.k_F = 1e-6;		% Motor force constant F = k_F*w^2 = k_F*gamma
+			obj.k_T = 1e-6;		% Motor torque constant T = k_T*w^2 = k_T*gamma
 
 			obj.I = 4*eye(3);	% Inertia matrix
 
@@ -50,9 +50,9 @@ classdef Constants
 
 			%% Altitude controller
 
-			obj.K_p_z = 500;		% Gains for the altitude PID
-			obj.K_d_z = .1;
-			obj.K_i_z = .01;
+			obj.K_p_z = 30;		% Gains for the altitude PID
+			obj.K_d_z = 100;
+			obj.K_i_z = 0.01;
 
 			%% Position controller
 
