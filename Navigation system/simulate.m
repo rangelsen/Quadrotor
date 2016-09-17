@@ -65,8 +65,8 @@ plotter = data_plotter();
 plotter.figure_nr = 0;
 
 %% Plot - Orientation
-% plotter.figure_nr = plotter.figure_nr + 1;
-% plotter.plot_orientation(T, theta_wb_out, theta_wb_c);
+plotter.figure_nr = plotter.figure_nr + 1;
+plotter.plot_orientation(T, theta_wb_out, theta_wb_c);
 
 %% Plot - Position
 plotter.figure_nr = plotter.figure_nr + 1;
