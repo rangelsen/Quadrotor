@@ -1,14 +1,16 @@
 function waypoints = update_waypoints(X, constants)
 
-persistent collection waypoint_index
+persistent waypoint_collection waypoint_index
 
 x = X(1);
 y = X(2);
 
 position = [x y]';
 
-if (isempty(collection))
-
+if (isempty(waypoint_collection))
+    
+    % Define waypoints
+    
 	wp_0 = [  0   0]';
 	wp_1 = [ 20  10]';
 	wp_2 = [ 30  35]';
@@ -17,20 +19,20 @@ if (isempty(collection))
 	wp_5 = [-50  10]';
 	wp_6 = [-20 -10]';
 
-	collection = [wp_0 wp_1 wp_2 wp_3 wp_4 wp_5 wp_6];
+	waypoint_collection = [wp_0 wp_1 wp_2 wp_3 wp_4 wp_5 wp_6];
 
 	waypoint_index = 1;
 end
 
-waypoints.n_waypoints       = length(collection);
-waypoints.collection        = collection;
-waypoints.previous_waypoint = collection(:, waypoint_index);
-waypoints.next_waypoint     = collection(:, waypoint_index + 1);
+waypoints.n_waypoints       = length(waypoint_collection);
+waypoints.waypoint_collection        = waypoint_collection;
+waypoints.previous_waypoint = waypoint_collection(:, waypoint_index);
+waypoints.next_waypoint     = waypoint_collection(:, waypoint_index + 1);
 
 if(norm(waypoints.next_waypoint - position) < constants.approach_distance && waypoint_index < waypoints.n_waypoints - 1)
 	waypoint_index              = waypoint_index + 1;
-	waypoints.previous_waypoint = collection(:, waypoint_index);
-	waypoints.next_waypoint     = collection(:, waypoint_index + 1);	
+	waypoints.previous_waypoint = waypoint_collection(:, waypoint_index);
+	waypoints.next_waypoint     = waypoint_collection(:, waypoint_index + 1);	
 end
 
 

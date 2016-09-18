@@ -1,15 +1,15 @@
 function output_guidance_system = guidance_system(X, previous_waypoint, next_waypoint, constants)
 
-persistent cross_track_error_last waypoint_index waypoint_collection
+persistent cross_track_error_last % waypoint_index waypoint_collection
 
 x     = X(1);
 y     = X(2);
 
-d_x   = X(4);
-d_y   = X(5);
+% d_x   = X(4);
+% d_y   = X(5);
 
 position = [x y]';
-velocity = [d_x d_y]';
+% velocity = [d_x d_y]';
 
 %% Navigation calculations
 

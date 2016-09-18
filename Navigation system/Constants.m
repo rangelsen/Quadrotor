@@ -1,14 +1,16 @@
 classdef Constants
 
 	properties
-
-		n_motors;
+        
+        %% Motors
+		n_motors; motor_kv_rating; motor_voltage_max;
+        motor_speed_max; gamma_max; gamma_min;
 
 		%% Physical
 		l; k_F; k_T; I; m; g;
 
 		%% Attitude controller
-		K_p; K_d; K_p_yaw; K_d_yaw; thr_base; gamma_max; gamma_min;
+		K_p; K_d; K_p_yaw; K_d_yaw; thr_base;
 
 		%% Altitude controller
 		K_p_z; K_d_z; K_i_z;
@@ -24,10 +26,14 @@ classdef Constants
 		%% Constructor
 
 		function obj = Constants() 
-
+            %% Motors
+            
 			obj.n_motors = 4;
-			obj.gamma_max = 11000^2; % Maximum motor rad/s
-			obj.gamma_min = 0;		 % Minimum motor rad/s
+            obj.motor_kv_rating   = 910;
+            obj.motor_voltage_max = 12.6;
+            obj.motor_speed_max   = obj.motor_kv_rating * obj.motor_voltage_max; % Maximum angular motor speed, rad/s
+			obj.gamma_max         = obj.motor_speed_max^2;
+            obj.gamma_min         = 0;
 		
 			%% Physical
 

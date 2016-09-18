@@ -1,7 +1,5 @@
 function theta_wb_c = tracking_controller(X, alpha, cross_track_error, d_cross_track_error, constants)
 
-persistent alpha_last
-
 d_x      = X(4);
 d_y      = X(5);
 
@@ -11,8 +9,6 @@ psi      = X(9);
 phi_c   = 0;
 theta_c = 0;
 psi_c   = alpha;
-
-e_theta = constants.theta_c_max - theta;
 
 velocity = norm([d_x d_y]');
 

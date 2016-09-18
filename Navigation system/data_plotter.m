@@ -132,7 +132,7 @@ classdef data_plotter
             r_north = r(1, :);
             r_west  = r(2, :);
 
-            waypoints_coordinates       = waypoints.collection;
+            waypoints_coordinates       = waypoints.waypoint_collection;
             waypoint_coordinates_north  = waypoints_coordinates(1, :);
             waypoint_coordinates_west   = waypoints_coordinates(2, :);
 
