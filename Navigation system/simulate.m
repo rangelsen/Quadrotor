@@ -2,10 +2,10 @@ clear all; clc;
 %% Options
 
 % Plotting options
-PLOT_POSITION            = false;
+PLOT_POSITION            = true;
 PLOT_POSITION_NORTH_WEST = true;
 PLOT_VELOCITY            = false;
-PLOT_ORIENTATION         = false;
+PLOT_ORIENTATION         = true;
 PLOT_CROSS_TRACK_ERROR   = false;
 PLOT_MOTORS              = false;
 
@@ -39,6 +39,7 @@ N  = length(T);
 
 % Allocations
 X                 = NaN(mx0, N);
+d_X               = NaN(mx0, N - 1);
 u                 = NaN(constants.n_motors, N - 1);
 theta_wb_c        = NaN(mt0, N - 1);
 cross_track_error = NaN(1, N );
@@ -63,7 +64,8 @@ for i = 1:N-1
     u(:, i) = saturate(u(:, i), constants.gamma_min, constants.gamma_max);
     
     d_X(:, i) = quadrotor(X(:, i), u(:, i), constants);
-    X(:, i+1) = X(:, i) + dt*d_X(:, i);
+    
+    X(:, i+1) = X(:, i) + dt * d_X(:, i);
 
 end
 
